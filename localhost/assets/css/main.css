@@ -54,21 +54,3 @@ button {
 .logout {
     color: #b7625c;
 }
-
-.Text {
-    background-image: linear-gradient(to left, #E21143, #FFB03A);
-    background-clip: text;
-    color: transparent;
-    font-size: 2em;
-    transition: all 0;
-}
-
-.Text.Flame {
-    filter: hue-rotate(360deg);
-    transition: all 1s;
-}
-
-.Text::selection {
-    color: white;
-    background: black;
-}

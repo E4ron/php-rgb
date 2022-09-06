@@ -21,21 +21,5 @@ if (!$_SESSION['user']) {
         <a href="#"><?= $_SESSION['user']['email'] ?></a>
         <a href="vendor/logout.php" class="logout">Выход</a>
     </form>
-    <script>
-        let text = document.querySelector(".Text")
-        let time = 1000
-        setInterval(() => {
-            console.log("Flame add")
-            text.classList.toggle("Flame")
-            setTimeout(() => {
-                console.log("Flame remove")
-                text.classList.toggle("Flame")
-                time === 0 
-                ? time = 1000
-                : time = 0
-            }, 1000)
-        }, time)
-    </script>
-
 </body>
 </html>
