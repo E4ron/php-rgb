@@ -1,7 +1,7 @@
 <?php
 
-    session_start();
     require_once 'connect.php';
+    require("session.php");
 
     $login = $_POST['login'];
     $email = $_POST['email'];

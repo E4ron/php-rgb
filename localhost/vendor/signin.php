@@ -1,7 +1,7 @@
 <?php
 
-    session_start();
     require_once 'connect.php';
+    require("session.php");
 
     $login = $_POST['login'];
     $password = md5($_POST['password']);
@@ -14,7 +14,13 @@
             "email" => $user['email']
         ];
 
-        setcookie("login", $login, time()+ 30, "/", "localhost");
+        $session = md5(time());
+        echo $session;
+        $id = $user["id"];
+
+        mysqli_query($connect, "UPDATE `users` SET `session`='$session' WHERE `id`='$id'");
+
+        setcookie("session", $session, time()+ 60 * 60 * 3600, "/", "localhost");
 
         header('Location: ../profile.php');
 

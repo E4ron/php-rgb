@@ -1,8 +1,9 @@
 <?php
-    session_start();
-    if ($_SESSION['user']) {
+    if ($_COOKIE['session']) {
         header('Location: profile.php');
+        return;
     }
+    require("vendor\session.php");
 ?>
 
 <!doctype html>

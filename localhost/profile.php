@@ -1,8 +1,10 @@
 <?php
-session_start();
-if (!$_SESSION['user']) {
+if (!$_COOKIE['session']) {
     header('Location: /');
+    return;
 }
+require("vendor\connect.php");
+require("vendor\session.php");
 ?>
 
 <!doctype html>
@@ -13,7 +15,6 @@ if (!$_SESSION['user']) {
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
-
     <!-- Профиль -->
 
     <form>
