@@ -54,3 +54,75 @@ button {
 .logout {
     color: #b7625c;
 }
+
+.card-header {
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+header {
+    position: fixed;
+    top: 0;
+
+    height: 60px;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:rgb(238, 99, 131);
+    animation: rotateRGB 1s linear infinite;
+}
+
+.wrapper {
+    display: flex;
+    max-width: 1300px;
+
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-wrapper {
+    flex-direction: column;
+    gap: 1em;
+
+    position: fixed;
+    top: 66px;
+}
+
+.Text {
+    color: white;
+}
+
+.Text::selection {
+    background: #ffffff;
+    background-clip: text;
+    -webkit-background-clip: text;
+    font-size: 2em;
+    border-radius: 4px;
+    
+    color:rgb(238, 99, 131);
+    animation: none;
+}
+
+form {
+    display: flex;
+    gap: 1em;
+    overflow: hidden;
+}
+
+@keyframes rotateRGB {
+    0% {
+        filter: hue-rotate(0);
+    }
+
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}
+
+nav {
+    display: flex;
+    gap: 1em;
+}

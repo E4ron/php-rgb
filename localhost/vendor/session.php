@@ -1,4 +1,5 @@
 <?php
+require_once 'connect.php';
     session_start();
     $session = $_COOKIE['session'];
     
@@ -7,6 +8,7 @@
     
         $user = mysqli_fetch_assoc($check_user);
         $_SESSION['user'] = [
+            "id" => $user["id"],
             "login" => $user['login'],
             "email" => $user['email']
         ];

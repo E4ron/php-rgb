@@ -59,7 +59,11 @@
 
         $password = md5($password);
 
-        mysqli_query($connect, "INSERT INTO `users` (`id`, `login`, `email`, `password`) VALUES (NULL, '$login', '$email', '$password')");
+        $session = md5(time());
+
+        setcookie("session", $session, time()+ 60 * 60 * 3600, "/", "localhost");
+
+        mysqli_query($connect, "INSERT INTO `users` (`login`, `email`, `password_cash`, `session`) VALUES ( '$login', '$email', '$password', '$session')");
 
         $user = mysqli_fetch_assoc($check_user);
 
