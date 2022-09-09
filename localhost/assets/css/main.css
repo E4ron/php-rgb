@@ -28,12 +28,18 @@ form {
     width: 400px;
 }
 
-input {
+input,
+textarea {
     margin: 10px 0;
     padding: 10px;
-    border: unset;
+    border: none;
     border-bottom: 2px solid #e3e3e3;
     outline: none;
+}
+
+textarea {
+    min-height: 3em;
+    max-height: 320px;
 }
 
 button {
@@ -77,8 +83,10 @@ header {
 .wrapper {
     display: flex;
     max-width: 1300px;
+    padding: 1em;
 
     width: 100%;
+
     justify-content: space-between;
     align-items: center;
 }
@@ -89,20 +97,27 @@ header {
 
     position: fixed;
     top: 66px;
+
+    height: fit-content;
+    overflow-y: auto;
 }
 
 .Text {
     color: white;
+    transition: color .2s;
+}
+
+a.Text:hover {
+    color: #d5d5d5;
 }
 
 .Text::selection {
     background: #ffffff;
-    background-clip: text;
     -webkit-background-clip: text;
     font-size: 2em;
     border-radius: 4px;
     
-    color:rgb(238, 99, 131);
+    color: #ee6383;
     animation: none;
 }
 
@@ -125,4 +140,23 @@ form {
 nav {
     display: flex;
     gap: 1em;
+}
+
+.user_date {
+    display: flex;
+    width: 100%;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.avatar {
+    width: 150px;
+    aspect-ratio: 1;   
+    overflow: hidden;    
+
+    object-fit: cover;
+    border-radius: 50%;
+    pointer-events: none;
+    user-select: none;
 }

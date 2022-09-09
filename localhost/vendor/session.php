@@ -9,6 +9,7 @@ require_once 'connect.php';
         $user = mysqli_fetch_assoc($check_user);
         $_SESSION['user'] = [
             "id" => $user["id"],
+            "photo" => $user["photo_url"],
             "login" => $user['login'],
             "email" => $user['email']
         ];

@@ -1,6 +1,20 @@
 <?php
 require_once("connect.php");
-$posts = mysqli_query($connect, "SELECT `post_id`, `title`, `content`, `id`, `login` FROM `posts` left join `users` on `posts`.`author` = `users`.`id` GROUP BY post_id DESC");
+$limit = 10;
+$offset = 1;
+
+$posts = mysqli_query($connect, "SELECT `post_id`, `title`, `content`, `create_date`, `id`, `login`
+                                        FROM 
+                                            (SELECT  * 
+                                             FROM `posts` 
+                                                 left join `users` 
+                                                     on `posts`.`author` = `users`.`id` 
+                                                     LIMIT $limit
+                                             OFFSET $offset
+                                             ) u
+                                        WHERE u.`delete_date` is NULL
+                                        ORDER BY `post_id` DESC
+                                        ");
 ?>
 
 <!DOCTYPE html>
@@ -11,42 +25,34 @@ $posts = mysqli_query($connect, "SELECT `post_id`, `title`, `content`, `id`, `lo
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/main.css">
-    <!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <title>Document</title>
 </head>
-
 <body>
+<header>
+    <div class="wrapper">
+        <h1 class="Text">Лента новостей</h1>
+        <a class="Text" href="../profile.php">Профиль</a>
+    </div>
+</header>
+<div class="wrapper card-wrapper">
     <?
-    echo "<header><div class=\"wrapper\"><h1 class=\"Text\">Лента новостей</h1><a class=\"Text\" href=\"../profile.php\">Профиль</a></div></header>";
-    echo "<div class=\"wrapper card-wrapper\">";
-    if ($posts) {
-        echo "<div class=\"card\" style=\"width: 18rem;\">";
-        foreach ($posts as $row) {
+    if ($_SESSION['message']) {
+        echo '<p class="msg">' . $_SESSION['message'] . '</p>';
+        sleep(5);
+        $_SESSION["message"] = null;
+    }
 
-            echo "<div class=\"card-header\">";
-            echo "<a href=\"/user?id=".$row["id"]."\" class=\"author\">".$row["login"]."</a>";
-            echo "<h5 class=\"card-title\">".$row["title"]."</h5>";
-            echo "</div>";
-            if ($row["content"]) {
-            
-                echo "<div class=\"card-body\">";
-                echo "<p class=\"card-text\" >".$row["content"]."</p>";
-                echo "</div>";
-                
-            }
+    if ($posts) {
+        foreach ($posts as $row) {
+            require("card_render.php");
         }
-        echo "</div>";
     } else {
         echo "Записей нет. Будьте первыми, кто опубликует здесь запись.";
     }
-    echo "</div>";
-
-    if ($_SESSION['message']) {
-        echo '<p class="msg"> ' . $_SESSION['message'] . ' </p>';
-    }
-
     ?>
+
+</div>
 </body>
 
 </html>

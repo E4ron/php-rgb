@@ -1,6 +1,6 @@
 <?php
 
-    require_once 'connect.php';
+    require_once('connect.php');
     require("session.php");
 
     $login = $_POST['login'];
@@ -64,6 +64,7 @@
         setcookie("session", $session, time()+ 60 * 60 * 3600, "/", "localhost");
 
         mysqli_query($connect, "INSERT INTO `users` (`login`, `email`, `password_cash`, `session`) VALUES ( '$login', '$email', '$password', '$session')");
+        $check_user = mysqli_query($connect, "SELECT * FROM `users` WHERE `login` = '$login' AND `password_cash` = '$password'");
 
         $user = mysqli_fetch_assoc($check_user);
 

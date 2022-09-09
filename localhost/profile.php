@@ -12,7 +12,7 @@ require("vendor\session.php");
 
 <head>
     <meta charset="UTF-8">
-    <title>Авторизация и регистрация</title>
+    <title>Мой профиль</title>
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 
@@ -28,10 +28,27 @@ require("vendor\session.php");
         </div>
     </header>
 
-    <form>
-        <h2 style="margin: 10px 0;"><?= "<div>Привет, " . $_SESSION['user']['login'] . "</div>" ?></h2>
+    <form method="post" action="vendor/upload.php" enctype="multipart/form-data">
+        <div>
+            <h2 style="margin: 10px 0;"><?= "<div>Привет, " . $_SESSION['user']['login'] . "</div>" ?></h2>
+            <?
+                if ($_SESSION["user"]["photo"]) {
+                    echo '<img class="avatar" src="vendor/uploaded_files/' . $_SESSION["user"]["photo"] . '" alt="Фото профиля">';
+                }
+            ?>
+        </div>
         <a href="#"><?= $_SESSION['user']['email'] ?></a>
+        <div>
+            <span>Upload a File:</span>
+            <input type="file" name="uploadedFile" />
+            <input type="submit" name="uploadBtn" value="Upload" />
+        </div>
         <a href="vendor/logout.php" class="logout">Выход</a>
+        <?
+        if ($_SESSION['message']) {
+            echo '<p class="msg"> ' . $_SESSION['message'] . ' </p>';
+        }
+        ?>
     </form>
 </body>
 
