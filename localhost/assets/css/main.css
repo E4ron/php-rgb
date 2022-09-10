@@ -5,7 +5,7 @@
 }
 
 body {
-    height: 100vh;
+    /* height: 100vh; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -78,6 +78,15 @@ header {
 
     background:rgb(238, 99, 131);
     animation: rotateRGB 1s linear infinite;
+
+    z-index: 1;
+}
+/* .content {
+    overflow-y: auto;
+} */
+
+.card {
+    margin: 10px;
 }
 
 .wrapper {
@@ -95,11 +104,20 @@ header {
     flex-direction: column;
     gap: 1em;
 
-    position: fixed;
+    position: absolute;
     top: 66px;
 
-    height: fit-content;
-    overflow-y: auto;
+
+
+    height: calc(100vh - 60px);
+}
+.card-title {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.card-body {
+    text-align: center;
 }
 
 .Text {
@@ -159,4 +177,39 @@ nav {
     border-radius: 50%;
     pointer-events: none;
     user-select: none;
+}
+.post {
+    width: 30px;
+}
+.profile {
+    gap: 1em;
+    position: absolute;
+    top: 66px;
+    padding: 1em;
+}
+
+.profile-user {
+    position: absolute;
+    top: 66px;
+    padding: 1em;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-name-photo {
+    display: flex;
+    flex-direction: row-reverse;
+    gap:1em;
+    width: fit-content;
+
+    justify-content: space-between;
+    align-items: center;
+}
+.avatar-uploud {
+    display: flex;
+    flex-flow: column wrap;
+}
+.profile-email {
+    gap: 1em;
+    margin-top: 10px;
 }

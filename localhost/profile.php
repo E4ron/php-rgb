@@ -29,27 +29,47 @@ require("vendor\session.php");
     </header>
 
     <form method="post" action="vendor/upload.php" enctype="multipart/form-data">
-        <div>
-            <h2 style="margin: 10px 0;"><?= "<div>Привет, " . $_SESSION['user']['login'] . "</div>" ?></h2>
-            <?
+        <div class="profile">
+            <div class="profile-name-photo">
+                <h2 style="margin: 10px 0;"><?= "Привет, " . $_SESSION['user']['login']  ?></h2>
+                <?
                 if ($_SESSION["user"]["photo"]) {
                     echo '<img class="avatar" src="vendor/uploaded_files/' . $_SESSION["user"]["photo"] . '" alt="Фото профиля">';
                 }
+                ?>
+            </div>
+            <div class="profile-email">
+                <a href="#"><?= $_SESSION['user']['email'] ?></a>
+            </div>
+            <div class="avatar-uploud">
+                <input type="file" name="uploadedFile" id="file" />
+                <input type="submit" name="uploadBtn" value="Загрузить фото профиля" id="submit" />
+            </div>
+            <a href="vendor/logout.php" class="logout">Выход</a>
+            <?
+            if ($_SESSION['message']) {
+                echo '<div class="msg alert alert-important' ,'">'. $_SESSION['message'] .'</div>';
+            }
             ?>
-        </div>
-        <a href="#"><?= $_SESSION['user']['email'] ?></a>
-        <div>
-            <span>Upload a File:</span>
-            <input type="file" name="uploadedFile" />
-            <input type="submit" name="uploadBtn" value="Upload" />
-        </div>
-        <a href="vendor/logout.php" class="logout">Выход</a>
-        <?
-        if ($_SESSION['message']) {
-            echo '<p class="msg"> ' . $_SESSION['message'] . ' </p>';
-        }
-        ?>
     </form>
+    <script>
+        let file = document.querySelector("#file");
+        let submit = document.querySelector("#submit");
+
+        file.addEventListener("input", submitEND);
+
+        function submitEND() {
+            if (file.value == "") {
+                submit.disabled = true;
+            } else {
+                submit.disabled = false;
+            }
+        }
+        submitEND()
+
+        $('div.alert').not('.alert-important').delay(3000).slideUp(300)
+    </script>
+
 </body>
 
 </html>

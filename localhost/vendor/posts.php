@@ -3,7 +3,7 @@ require_once("connect.php");
 $limit = 10;
 $offset = 1;
 
-$posts = mysqli_query($connect, "SELECT `post_id`, `title`, `content`, `create_date`, `id`, `login`
+$posts = mysqli_query($connect, "SELECT `post_id`, `title`, `content`, `create_date`, `id`, `login`, `photo_url`
                                         FROM 
                                             (SELECT  * 
                                              FROM `posts` 
@@ -28,31 +28,36 @@ $posts = mysqli_query($connect, "SELECT `post_id`, `title`, `content`, `create_d
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <title>Document</title>
 </head>
+
 <body>
-<header>
-    <div class="wrapper">
-        <h1 class="Text">Лента новостей</h1>
-        <a class="Text" href="../profile.php">Профиль</a>
-    </div>
-</header>
-<div class="wrapper card-wrapper">
-    <?
-    if ($_SESSION['message']) {
-        echo '<p class="msg">' . $_SESSION['message'] . '</p>';
-        sleep(5);
-        $_SESSION["message"] = null;
-    }
-
-    if ($posts) {
-        foreach ($posts as $row) {
-            require("card_render.php");
+    <!-- <div class="content"> -->
+    <header>
+        <div class="wrapper">
+            <h1 class="Text">Лента новостей</h1>
+            <a class="Text" href="../profile.php">Профиль</a>
+        </div>
+    </header>
+    <div class="card-wrapper wrapper">
+        <?
+        if ($_SESSION['message']) {
+            echo '<p class="msg">' . $_SESSION['message'] . '</p>';
+            sleep(5);
+            $_SESSION["message"] = null;
         }
-    } else {
-        echo "Записей нет. Будьте первыми, кто опубликует здесь запись.";
-    }
-    ?>
 
-</div>
+        if ($posts) {
+            foreach ($posts as $row) {
+                
+                require("news.php");
+            }
+        } else {
+            echo "Записей нет. Будьте первыми, кто опубликует здесь запись.";
+        }
+        ?>
+
+    </div>
+    <!-- </div> -->
+
 </body>
 
 </html>

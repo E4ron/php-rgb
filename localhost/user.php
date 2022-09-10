@@ -20,7 +20,7 @@ if ($user_id = $_SESSION["user"]["id"]) {
         header("Location: /profile.php");
     }
 }
-$query =  "SELECT login, email FROM users WHERE id = '$id' LIMIT 1";
+$query =  "SELECT login, email, photo_url FROM users WHERE id = '$id' LIMIT 1";
 $result = mysqli_query($connect, $query);
 $current_user = mysqli_fetch_assoc($result);
 if ($current_user) {
@@ -61,8 +61,15 @@ if ($current_user) {
         echo '<p class="msg"> ' . $_SESSION['message'] . ' </p>';
     }
     ?>
-    <form>
-        <h2 style="margin: 10px 0;"><?= "<div>" . $current_user['login'] . "</div>" ?></h2>
+    <form class="profile-user">
+        <div class="profile-name-photo">
+            <h2 style="margin: 10px 0;"><?= $current_user['login']?></h2>
+            <?
+                if ($_SESSION["user"]["photo"]) {
+                    echo '<img class="avatar" src="/vendor/uploaded_files/' . $current_user["photo_url"] . '" alt="Фото профиля">';
+                }
+            ?>
+        </div>
         <?
         echo "<a href=\"mailto:" . $current_user["email"] . "\">" . $current_user['email'];
         ?>

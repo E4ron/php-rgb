@@ -1,8 +1,7 @@
 <?php
 session_start();
 
-$message = '';
-if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Upload') {
+if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Загрузить фото профиля') {
     if (isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD_ERR_OK) {
         // get details of the uploaded file
         $fileTmpPath = $_FILES['uploadedFile']['tmp_name'];
@@ -32,6 +31,7 @@ if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Upload') {
 
             $dest_path = $tempFileDir . $newTempFileName;
             if (move_uploaded_file($fileTmpPath, $dest_path)) {
+
                 $newFileName = sha1_file($dest_path) . '.' . $fileExtension;
                 $roblox_sex = $uploadFileDir . $newFileName;
                 copy($dest_path, $roblox_sex);
@@ -41,7 +41,7 @@ if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Upload') {
                 $id = $_SESSION["user"]["id"];
 
                 if ($_SESSION['user'] && $result = mysqli_query($connect, "UPDATE `users` SET `photo_url`='$newFileName' WHERE id='$id'")) {
-                    $message = 'File is successfully uploaded.' . $newFileName;
+                    $message = 'File is successfully uploaded.';
                 } else {
                     $message = 'Ошибка базы данных.';
                     if ($_SESSION['user']) {
