@@ -1,7 +1,7 @@
 <?php
 require_once("connect.php");
-$limit = 10;
-$offset = 1;
+$limit = 5;
+$offset = 0;
 
 $posts = mysqli_query($connect, "SELECT `post_id`, `title`, `content`, `create_date`, `id`, `login`, `photo_url`
                                         FROM 
@@ -9,11 +9,11 @@ $posts = mysqli_query($connect, "SELECT `post_id`, `title`, `content`, `create_d
                                              FROM `posts` 
                                                  left join `users` 
                                                      on `posts`.`author` = `users`.`id` 
-                                                     LIMIT $limit
-                                             OFFSET $offset
                                              ) u
                                         WHERE u.`delete_date` is NULL
                                         ORDER BY `post_id` DESC
+                                        LIMIT $limit
+                                        OFFSET $offset
                                         ");
 ?>
 
@@ -31,13 +31,16 @@ $posts = mysqli_query($connect, "SELECT `post_id`, `title`, `content`, `create_d
 
 <body>
     <!-- <div class="content"> -->
-    <header>
+    <header class="header">
         <div class="wrapper">
             <h1 class="Text">Лента новостей</h1>
-            <a class="Text" href="../profile.php">Профиль</a>
+            <div>            
+                <a class="Text" href="../profile.php">Профиль</a>
+                <a class="Text" href="cart.php">Корзина</a>
+            </div>
         </div>
     </header>
-    <div class="card-wrapper wrapper">
+    <div class="card-wrapper">
         <?
         if ($_SESSION['message']) {
             echo '<p class="msg">' . $_SESSION['message'] . '</p>';

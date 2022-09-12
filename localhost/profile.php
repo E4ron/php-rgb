@@ -18,7 +18,7 @@ require("vendor\session.php");
 
 <body>
     <!-- Профиль -->
-    <header style="position:fixed; top: 0; padding: 1em;">
+    <header style="position:fixed; top: 0; padding: 1em;" class="header">
         <div class="wrapper">
             <h1 class="Text">Лента новостей</h1>
             <nav>
@@ -34,7 +34,7 @@ require("vendor\session.php");
                 <h2 style="margin: 10px 0;"><?= "Привет, " . $_SESSION['user']['login']  ?></h2>
                 <?
                 if ($_SESSION["user"]["photo"]) {
-                    echo '<img class="avatar" src="vendor/uploaded_files/' . $_SESSION["user"]["photo"] . '" alt="Фото профиля">';
+                    echo '<img class="avatar" src="/vendor/uploaded_files/' . $_SESSION["user"]["photo"] . '" alt="Фото профиля">';
                 }
                 ?>
             </div>
@@ -67,7 +67,6 @@ require("vendor\session.php");
         }
         submitEND()
 
-        $('div.alert').not('.alert-important').delay(3000).slideUp(300)
     </script>
 
 </body>

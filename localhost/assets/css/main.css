@@ -66,7 +66,7 @@ button {
     align-items: flex-end;
 }
 
-header {
+.header {
     position: fixed;
     top: 0;
 
@@ -87,6 +87,7 @@ header {
 
 .card {
     margin: 10px;
+    top: 66px;
 }
 
 .wrapper {
@@ -114,11 +115,11 @@ header {
 .card-title {
     justify-content: center;
     align-items: center;
-    text-align: center;
+    /* text-align: center; */
 }
-.card-body {
+/* .card-body {
     text-align: center;
-}
+} */
 
 .Text {
     color: white;
@@ -143,6 +144,9 @@ form {
     display: flex;
     gap: 1em;
     overflow: hidden;
+}
+.form {
+    width: auto;
 }
 
 @keyframes rotateRGB {

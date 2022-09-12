@@ -15,7 +15,7 @@ if (!is_numeric($id)) {
     $_SESSION["message"] = null;
 }
 
-$query =  "SELECT `post_id`, `title`, `content`, `create_date`, `id`, `login`
+$query =  "SELECT `post_id`, `title`, `content`, `create_date`, `id`, `login`, `photo_url`
             FROM 
                 (SELECT  * 
                 FROM `posts` 
@@ -23,8 +23,7 @@ $query =  "SELECT `post_id`, `title`, `content`, `create_date`, `id`, `login`
                         on `posts`.`author` = `users`.`id` 
                 ) u
             WHERE u.`delete_date` is NULL
-            AND u.`post_id` = '$id'
-            ORDER BY `post_id` DESC";
+            AND u.`post_id` = '$id'";
 $result = mysqli_query($connect, $query);
 $row = mysqli_fetch_assoc($result);
 if ($row) {
@@ -49,7 +48,7 @@ if ($row) {
 
 <body>
 <!-- Профиль -->
-<header style="position:fixed; top: 0; padding: 1em;">
+<header style="position:fixed; top: 0; padding: 1em;" class="header">
     <div class="wrapper">
         <h1 class="Text">
             <?

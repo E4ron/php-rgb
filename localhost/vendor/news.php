@@ -21,4 +21,8 @@ if ($row["content"]) {
     echo "<p class=\"card-text\" >" . $row["content"] . "</p>";
     echo "</div>";
 }
+echo "<form class=\"form\" action=\"cart_add.php\" method=\"post\">";
+echo "<input style=\"display:none;\" name=\"product_id\" value=". $row["post_id"] .">";
+echo "<button type=\"submit\" class=\"btn btn-primary\">Добавить в корзину</button>";
+echo "</form>";
 echo "</div>";
